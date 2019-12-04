@@ -6,6 +6,11 @@
 
 > Начальный набор кода сгенерирован на [start.spring.io](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.1.RELEASE&packaging=jar&jvmVersion=1.8&groupId=ru.helpcontrol.sanbox&artifactId=sarafan&name=Sarafan&description=Demo%20project%20for%20Spring%20Boot%20&packageName=ru.helpcontrol.sanbox.sarafan&dependencies=web,devtools)
 
+## Start server
+
+```shell script
+$mvn spring-boot:run
+``` 
 
 ## Api List
 
