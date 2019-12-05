@@ -6,17 +6,17 @@
 
 > Начальный набор кода сгенерирован на [start.spring.io](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.1.RELEASE&packaging=jar&jvmVersion=1.8&groupId=ru.helpcontrol.sanbox&artifactId=sarafan&name=Sarafan&description=Demo%20project%20for%20Spring%20Boot%20&packageName=ru.helpcontrol.sanbox.sarafan&dependencies=web,devtools)
 
+> Использована H2 Database ()
+
 ## Start server
 
 ```shell script
 $mvn spring-boot:run
-``` 
-
-## Api List
-
-```shell script
-$curl http://localhost:8080/messages
 ```
+
+## Access to H2 Database
+
+By default - [http://localhost:8080/h2-console/](http://localhost:8080/h2-console/)
 
 ## Browser console test operations API call
 
