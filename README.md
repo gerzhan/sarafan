@@ -29,9 +29,9 @@ fetch('/messages/2').then(response => response.json().then(console.log))
 
 // POST add new one
 fetch(
-  '/messages', 
-  { 
-    method: 'POST', 
+  '/messages',
+  {
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text: 'Fourth message (4)', id: 10 })
   }
@@ -39,10 +39,10 @@ fetch(
 
 // PUT save existing
 fetch(
-  '/messages/4', 
-  { 
-    method: 'PUT', 
-    headers: { 'Content-Type': 'application/json' }, 
+  '/messages/4',
+  {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text: 'Fourth message', id: 10 })
   }
 ).then(result => result.json().then(console.log));
@@ -50,3 +50,11 @@ fetch(
 // DELETE existing
 fetch('/messages/4', { method: 'DELETE' }).then(result => console.log(result))
 ```
+
+## Web Client - Single Page Application
+
+### Dependencies
+
+* [vuejs (v2)](https://vuejs.org/)
+* [vue-resource](https://github.com/pagekit/vue-resource)
+* [vuematerial.io](https://vuematerial.io/)
