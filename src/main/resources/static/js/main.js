@@ -1,5 +1,37 @@
 // @see https://vuematerial.io/getting-started
 Vue.use(VueMaterial.default);
+// NOTE: компонент "форма ввода сообщения"
+Vue.component('message-form', {
+  props: [ 'messages' ],
+  template: `
+  <div>
+    <form @submit="onSubmit">
+    <md-field>
+      <label>Your message</label>
+      <md-input v-model="textMessage"></md-input>
+    </md-field>
+    <md-button class="md-primary" type="submit" :disabled="textMessage.length==0">Send</md-button>
+    </form>
+  </div>
+  `,
+  data() {
+    return {
+      textMessage: ''
+    }
+  },
+  methods: {
+    onSubmit(e) {
+      e.preventDefault();
+      const text = this.textMessage;
+      messageApi.save({}, {text})
+        .then((result) => result.json())
+        .then((data) => {
+          this.messages.push(data);
+          this.textMessage = '';
+        });
+    },
+  },
+})
 // NOTE: компонент "пункт списка сообщений"
 Vue.component('message-list-item', {
   // NOTE: простой способ задания имен свойств для передачи данных в компонент
@@ -41,6 +73,7 @@ new Vue({
   template: `
   <div>
     <h1>{{AppName}}</h1>
+    <message-form :messages="messages"></message-form>
     <message-list messages :messages="messages"></message-list>
   </div>
   `,
