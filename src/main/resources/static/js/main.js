@@ -66,21 +66,27 @@ Vue.component('message-form', {
 // NOTE: компонент "пункт списка сообщений"
 Vue.component('message-list-item', {
   // NOTE: простой способ задания имен свойств для передачи данных в компонент
-  props: ['message', 'editMethod'],
+  props: ['message', 'editMethod', 'deleteMethod'],
   template: `
   <md-list-item>
     <div class="md-list-item-text">
       <i>({{message.id}})</i> {{message.text}}
     </div>
-    <md-button class="md-fab md-plain" @click="editItem">
+    <md-button class="md-fab md-mini md-primary" @click="editItem">
       <md-icon>edit</md-icon>
+    </md-button>
+     <md-button class="md-fab md-mini md-accent" @click="deleteItem">
+      <md-icon>delete_forever</md-icon>
     </md-button>
   </md-list-item>
   `,
   methods: {
-    editItem: function() {
+    editItem: function () {
       this.editMethod(this.message);
     },
+    deleteItem: function () {
+      this.deleteMethod(this.message);
+    }
   },
 });
 
@@ -105,6 +111,7 @@ Vue.component('message-list', {
       :message="item"
       :key="item.id"
       :editMethod="editMethod"
+      :deleteMethod="deleteMethod"
       />
   </md-list>
   `,
@@ -117,6 +124,14 @@ Vue.component('message-list', {
     editMethod: function(item) {
       this.currentMessage = item;
     },
+    deleteMethod: function (item) {
+      const {id} = item;
+      messageApi.remove({id}).then(result => {
+        if (result.ok) {
+          this.messages.splice(this.messages.indexOf(this.message), 1);
+        }
+      });
+    }
   },
 });
 // @see https://github.com/pagekit/vue-resource/blob/develop/docs/resource.md#example
@@ -127,7 +142,7 @@ new Vue({
   el: '#app',
   template: `
   <div>
-    <h1>{{AppName}}</h1> 
+    <h1>{{AppName}}</h1>
     <message-list messages :messages="messages" :selectAction="selectedItem"></message-list>
   </div>
   `,
